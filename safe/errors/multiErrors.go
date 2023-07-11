@@ -1,4 +1,4 @@
-package safe
+package errors
 
 import (
 	"errors"
@@ -35,7 +35,7 @@ func (m MultiErrors) IsIn(targetErr error) bool {
 	return false
 }
 
-func (m MultiErrors) AsIn(targetError error) bool {
+func (m MultiErrors) AsIn(targetError interface{}) bool {
 	for _, err := range m {
 		if errors.As(err, &targetError) {
 			return true
