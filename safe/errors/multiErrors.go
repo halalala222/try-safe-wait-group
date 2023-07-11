@@ -2,6 +2,8 @@ package errors
 
 import (
 	"errors"
+	"fmt"
+	"log"
 	"strings"
 )
 
@@ -12,8 +14,13 @@ var _ error = &MultiErrors{}
 func (m MultiErrors) Error() string {
 	var errorStringBuilder strings.Builder
 
+	if _, err := fmt.Fprintf(&errorStringBuilder, "total errors count is : %d\n", len(m)); err != nil {
+		log.Println(err)
+		return ""
+	}
 	for _, err := range m {
 		errorStringBuilder.WriteString(err.Error())
+		errorStringBuilder.WriteString(" ")
 	}
 
 	return errorStringBuilder.String()
