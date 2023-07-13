@@ -1,4 +1,4 @@
-package errors
+package multiErrors
 
 import (
 	"errors"
@@ -41,4 +41,13 @@ func TestMultiErrors_IsIn(t *testing.T) {
 	if !multiErrors.IsIn(testErrors[1]) {
 		t.Errorf("expect [%v] is in,but get not in", testErrors[1])
 	}
+}
+
+func TestMultiErrors_Cap(t *testing.T) {
+	var (
+		multiError = Cap(10)
+		newError   = errors.New("new error")
+	)
+	multiError = append(multiError, newError)
+	t.Log(multiError)
 }
