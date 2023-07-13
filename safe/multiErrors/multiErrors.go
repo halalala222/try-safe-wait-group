@@ -1,4 +1,4 @@
-package errors
+package multiErrors
 
 import (
 	"errors"
@@ -67,4 +67,8 @@ func (m MultiErrors) MultiErrorsAs(multiErrors MultiErrors) bool {
 		}
 	}
 	return true
+}
+
+func Cap(capNum int64) MultiErrors {
+	return make([]error, 0, capNum)
 }
